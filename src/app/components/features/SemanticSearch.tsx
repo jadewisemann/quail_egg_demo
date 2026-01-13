@@ -108,8 +108,8 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                             key={tag}
                             onClick={() => toggleFilter(tag)}
                             className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all border ${activeFilters.includes(tag)
-                                    ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-100'
-                                    : 'bg-white border-zinc-200 text-zinc-600 hover:border-blue-300 hover:text-blue-600'
+                                ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-100'
+                                : 'bg-white border-zinc-200 text-zinc-600 hover:border-blue-300 hover:text-blue-600'
                                 }`}
                         >
                             {tag}
@@ -131,10 +131,15 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                                 className="bg-blue-50 text-blue-700 border-blue-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1.5 font-medium animate-in fade-in zoom-in duration-200"
                             >
                                 <span>{filter}</span>
-                                <X
-                                    className="w-3 h-3 cursor-pointer hover:text-blue-900"
-                                    onClick={() => toggleFilter(filter)}
-                                />
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleFilter(filter);
+                                    }}
+                                    className="p-1 -mr-1 hover:bg-blue-100 rounded-full transition-colors flex items-center justify-center"
+                                >
+                                    <X className="w-3 h-3 text-blue-400 hover:text-blue-700" />
+                                </button>
                             </Badge>
                         ))}
                         <button
