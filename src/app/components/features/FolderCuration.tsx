@@ -45,7 +45,7 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
     ];
 
     return (
-        <div className="min-h-screen bg-white pb-20">
+        <div className="bg-white">
             {/* Header / content ... */}
             {/* skipping some lines for brevity in replacement but making sure it's contiguous */}
             <div className="p-6 pb-4">

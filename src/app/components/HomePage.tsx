@@ -98,18 +98,18 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="bg-white pb-6">
       {/* Header with Search */}
-      <div className="sticky top-0 bg-white z-10 border-b border-zinc-200">
-        <div className="p-4">
+      <div className="sticky top-0 bg-white z-10 border-b border-zinc-100 shadow-sm">
+        <div className="p-6">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400" />
-            <Input
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
+            <input
               type="text"
               placeholder="강남역 조용한 카페, 저장한 파스타집..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-6 text-base"
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all"
             />
           </div>
 
@@ -169,7 +169,7 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
       {/* Floating Action Button */}
       <Button
         size="lg"
-        className="fixed bottom-24 right-4 rounded-full w-14 h-14 shadow-lg z-40"
+        className="absolute bottom-6 right-6 rounded-full w-14 h-14 shadow-2xl z-40 bg-blue-600 hover:bg-blue-700 text-white"
       >
         <Plus className="w-6 h-6" />
       </Button>

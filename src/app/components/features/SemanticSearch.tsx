@@ -79,7 +79,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
     };
 
     return (
-        <div className="min-h-screen bg-white pb-20">
+        <div className="bg-white">
             {/* Search Header */}
             <div className="bg-white p-6 border-b border-zinc-200 sticky top-0 z-20 shadow-sm">
                 <div className="relative mb-4">
@@ -87,7 +87,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                     <input
                         type="text"
                         placeholder="어떤 장소를 찾으시나요?"
-                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-10 py-3.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all"
+                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-12 py-3.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-medium"
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                     />

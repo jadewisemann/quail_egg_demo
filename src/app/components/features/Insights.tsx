@@ -40,7 +40,7 @@ export function Insights() {
     ];
 
     return (
-        <div className="min-h-screen bg-white pb-20">
+        <div className="bg-white">
             {/* Header */}
             <div className="p-6 pb-4">
                 <div className="flex items-center gap-2 mb-2">

@@ -5,7 +5,7 @@ import { Badge } from '@/app/components/ui/badge';
 
 export function ProfilePage() {
     return (
-        <div className="min-h-screen bg-zinc-50 pb-20">
+        <div className="bg-zinc-50 pb-10">
             {/* Header / Profile Info */}
             <div className="bg-white p-6 border-b border-zinc-200">
                 <div className="flex items-center gap-4 mb-6">
