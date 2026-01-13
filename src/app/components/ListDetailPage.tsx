@@ -43,7 +43,7 @@ export function ListDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Header */}
       <div className="sticky top-0 bg-white z-10 border-b border-zinc-200">
         <div className="flex items-center gap-3 p-4">
@@ -51,8 +51,8 @@ export function ListDetailPage({
             <ChevronLeft className="w-6 h-6" />
           </Button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-lg font-bold truncate">{currentFolder?.name}</h1>
-            <p className="text-xs text-zinc-500 font-medium">{recursivePlaces.length}개의 장소 · {subFolders.length}개 폴더</p>
+            <h1 className="text-xl font-bold truncate text-zinc-900">{currentFolder?.name}</h1>
+            <p className="text-sm text-zinc-500 font-bold">{recursivePlaces.length}개의 장소 · {subFolders.length}개 폴더</p>
           </div>
           <Button
             variant={editMode ? "default" : "ghost"}
@@ -75,7 +75,7 @@ export function ListDetailPage({
                   ) : (
                     <BreadcrumbLink
                       onClick={() => crumb.id === 'home' ? onNavigateBack() : onNavigateToBreadcrumb(crumb.id)}
-                      className="cursor-pointer whitespace-nowrap"
+                      className="cursor-pointer whitespace-nowrap text-sm font-medium"
                     >
                       {crumb.name}
                     </BreadcrumbLink>
@@ -92,9 +92,9 @@ export function ListDetailPage({
             variant={viewMode === 'list' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setViewMode('list')}
-            className="flex-1"
+            className="flex-1 h-10 text-sm font-bold"
           >
-            <List className="w-4 h-4 mr-2" />
+            <List className="w-5 h-5 mr-2" />
             리스트 보기
           </Button>
           <Button
@@ -202,21 +202,21 @@ export function ListDetailPage({
                       <div className="flex-1 p-4 flex flex-col justify-between min-w-0">
                         <div>
                           <div className="flex justify-between items-start mb-1">
-                            <h4 className="font-bold text-zinc-900 text-base truncate pr-2">{place.name}</h4>
+                            <h4 className="font-bold text-zinc-900 text-lg truncate pr-2">{place.name}</h4>
                             {place.rating && (
                               <div className="flex items-center gap-0.5 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-100 flex-shrink-0">
-                                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                <span className="text-[11px] font-bold text-amber-700">{place.rating}</span>
+                                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                                <span className="text-sm font-bold text-amber-700">{place.rating}</span>
                               </div>
                             )}
                           </div>
-                          <p className="text-xs text-zinc-500 truncate">{place.address}</p>
+                          <p className="text-sm text-zinc-500 font-medium truncate">{place.address}</p>
                         </div>
 
                         <div className="flex items-center justify-between mt-auto">
                           <div className="flex gap-1.5 overflow-hidden">
                             {place.tags.slice(0, 2).map((tag) => (
-                              <span key={tag} className="text-[10px] px-2 py-0.5 bg-zinc-50 text-zinc-500 rounded-lg font-bold border border-zinc-100">
+                              <span key={tag} className="text-[11px] px-2 py-0.5 bg-zinc-50 text-zinc-500 rounded-lg font-bold border border-zinc-100">
                                 {tag}
                               </span>
                             ))}
@@ -251,10 +251,10 @@ export function ListDetailPage({
                       className="flex items-center gap-3 p-4 bg-zinc-50 rounded-lg cursor-pointer hover:bg-zinc-100 transition-colors"
                       onClick={() => onNavigateToFolder(folder.id)}
                     >
-                      <span className="text-2xl">{folder.icon}</span>
+                      <span className="text-3xl">{folder.icon}</span>
                       <div className="flex-1">
-                        <h4 className="font-medium">{folder.name}</h4>
-                        <p className="text-sm text-zinc-500">{folder.placeCount}개의 장소</p>
+                        <h4 className="font-bold text-base text-zinc-800">{folder.name}</h4>
+                        <p className="text-sm text-zinc-500 font-medium">{folder.placeCount}개의 장소</p>
                       </div>
                       <ChevronRight className="w-5 h-5 text-zinc-400" />
                     </div>
@@ -284,7 +284,7 @@ export function ListDetailPage({
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4 className="font-medium">{place.name}</h4>
+                          <h4 className="font-bold text-lg text-zinc-900">{place.name}</h4>
                           {editMode && (
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
@@ -302,16 +302,16 @@ export function ListDetailPage({
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                           {place.rating && (
-                            <span className="text-sm text-amber-500 flex items-center gap-0.5">
-                              <Star className="w-3 h-3 fill-current" />
+                            <span className="text-sm text-amber-500 font-bold flex items-center gap-0.5">
+                              <Star className="w-3.5 h-3.5 fill-current" />
                               {place.rating}
                             </span>
                           )}
                           {place.distance && (
-                            <span className="text-sm text-zinc-500">{place.distance}</span>
+                            <span className="text-sm text-zinc-400 font-bold">{place.distance}</span>
                           )}
                         </div>
-                        <p className="text-sm text-zinc-500 mb-2 line-clamp-1">{place.address}</p>
+                        <p className="text-sm text-zinc-500 mb-3 font-medium line-clamp-1">{place.address}</p>
                         <div className="flex gap-1 flex-wrap">
                           {place.tags.map(tag => (
                             <Badge key={tag} variant="secondary" className="text-xs">
@@ -319,7 +319,7 @@ export function ListDetailPage({
                             </Badge>
                           ))}
                           {place.aiTags?.map(tag => (
-                            <Badge key={tag} variant="outline" className="text-xs text-blue-600 border-blue-200">
+                            <Badge key={tag} variant="outline" className="text-xs font-bold text-blue-600 border-blue-200">
                               ✨#{tag}
                             </Badge>
                           ))}

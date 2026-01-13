@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Home, Search, Sparkles, BarChart3, User } from 'lucide-react';
+import { Home, Search, Sparkles, BarChart3, User, Plus } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
 import { HomePage } from '@/app/components/HomePage';
 import { ListDetailPage } from '@/app/components/ListDetailPage';
 import { PlaceDetailPage } from '@/app/components/PlaceDetailPage';
@@ -160,6 +161,16 @@ export default function App() {
           </div>
         </div>
 
+        {/* Floating Action Button - Only on Home View */}
+        {currentView.type === 'home' && (
+          <Button
+            size="lg"
+            className="absolute bottom-20 right-6 rounded-full w-14 h-14 shadow-2xl z-40 bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            <Plus className="w-6 h-6" />
+          </Button>
+        )}
+
         {/* Bottom Navigation - Fixed within the container */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-zinc-100 z-50">
           <div className="flex justify-around items-center h-[65px] px-2 pb-2">
@@ -168,7 +179,7 @@ export default function App() {
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'home' ? 'text-blue-600' : 'text-zinc-400'}`}
             >
               <Home className="w-6 h-6" />
-              <span className="text-[10px] font-medium">홈</span>
+              <span className="text-xs font-medium">홈</span>
             </button>
 
             <button
@@ -176,7 +187,7 @@ export default function App() {
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'search' ? 'text-blue-600' : 'text-zinc-400'}`}
             >
               <Search className="w-6 h-6" />
-              <span className="text-[10px] font-medium">검색</span>
+              <span className="text-xs font-medium">검색</span>
             </button>
 
             <button
@@ -184,7 +195,7 @@ export default function App() {
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'curation' ? 'text-blue-600' : 'text-zinc-400'}`}
             >
               <Sparkles className="w-6 h-6" />
-              <span className="text-[10px] font-medium">AI 큐레이션</span>
+              <span className="text-xs font-medium">AI 큐레이션</span>
             </button>
 
             <button
@@ -192,7 +203,7 @@ export default function App() {
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'insights' ? 'text-blue-600' : 'text-zinc-400'}`}
             >
               <BarChart3 className="w-6 h-6" />
-              <span className="text-[10px] font-medium">인사이트</span>
+              <span className="text-xs font-medium">인사이트</span>
             </button>
 
             <button
@@ -200,7 +211,7 @@ export default function App() {
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'profile' ? 'text-blue-600' : 'text-zinc-400'}`}
             >
               <User className="w-6 h-6" />
-              <span className="text-[10px] font-medium">프로필</span>
+              <span className="text-xs font-medium">프로필</span>
             </button>
           </div>
         </div>

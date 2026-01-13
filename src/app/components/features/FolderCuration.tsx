@@ -50,10 +50,10 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
             {/* skipping some lines for brevity in replacement but making sure it's contiguous */}
             <div className="p-6 pb-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Coffee className="w-6 h-6 text-amber-400" />
+                    <Coffee className="w-7 h-7 text-amber-500" />
                     <h1 className="text-2xl font-bold">업무하기 좋은</h1>
                 </div>
-                <p className="text-sm text-zinc-500">156개 장소</p>
+                <p className="text-base text-zinc-500 font-bold">156개 장소</p>
             </div>
 
             {/* AI Curation Header */}
@@ -66,8 +66,8 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
                             <Sparkles className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1">
-                            <h2 className="text-sm font-bold text-zinc-900 mb-1">이번 월요일 오전에 최적</h2>
-                            <p className="text-xs text-zinc-600">
+                            <h2 className="text-base font-bold text-zinc-900 mb-1">이번 월요일 오전에 최적</h2>
+                            <p className="text-sm text-zinc-600 font-medium">
                                 당신의 방문 패턴과 평가를 분석한 맞춤 추천입니다
                             </p>
                         </div>
@@ -77,7 +77,7 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
 
             {/* Top Picks */}
             <div className="px-6">
-                <h2 className="text-sm font-semibold text-zinc-500 mb-4">AI 추천 순위</h2>
+                <h2 className="text-base font-bold text-zinc-500 mb-4 uppercase tracking-wider">AI 추천 순위</h2>
 
                 <div className="space-y-4">
                     {topPicks.map((place, index) => (
@@ -90,12 +90,12 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
                                 <div className="relative flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl backdrop-blur-sm">
+                                        <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center text-3xl backdrop-blur-sm">
                                             {place.image}
                                         </div>
                                         <div>
-                                            <div className="text-xs text-white/80 mb-0.5 font-medium">매칭 점수</div>
-                                            <div className="text-2xl font-bold">{place.matchScore}%</div>
+                                            <div className="text-sm text-white/80 mb-0.5 font-bold">매칭 점수</div>
+                                            <div className="text-3xl font-black">{place.matchScore}%</div>
                                         </div>
                                     </div>
                                     <div className="text-right">
@@ -111,21 +111,21 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
 
                             {/* Place Info */}
                             <div className="p-4">
-                                <h3 className="text-base font-bold mb-1">{place.name}</h3>
-                                <div className="flex items-center gap-2 text-xs text-zinc-500 mb-3">
-                                    <MapPin className="w-3.5 h-3.5" />
+                                <h3 className="text-lg font-bold mb-1.5">{place.name}</h3>
+                                <div className="flex items-center gap-2 text-sm text-zinc-500 mb-4 font-bold">
+                                    <MapPin className="w-4 h-4" />
                                     <span>{place.location}</span>
                                     <span>·</span>
                                     <span>{place.distance}</span>
                                 </div>
 
                                 {/* AI Reason */}
-                                <div className="bg-zinc-50 rounded-xl p-3 mb-3 border border-zinc-100">
+                                <div className="bg-zinc-50 rounded-xl p-4 mb-4 border border-zinc-100">
                                     <div className="flex items-start gap-2">
-                                        <Zap className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                                        <Zap className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                                         <div>
-                                            <div className="text-xs text-zinc-500 mb-1 font-medium">AI가 선택한 이유</div>
-                                            <div className="text-xs text-blue-700 font-semibold">{place.reason}</div>
+                                            <div className="text-xs text-zinc-500 mb-1 font-bold uppercase">AI가 선택한 이유</div>
+                                            <div className="text-sm text-blue-800 font-bold leading-relaxed">{place.reason}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -44,10 +44,10 @@ export function Insights() {
             {/* Header */}
             <div className="p-6 pb-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <BarChart3 className="w-6 h-6 text-blue-600" />
+                    <BarChart3 className="w-7 h-7 text-blue-600" />
                     <h1 className="text-2xl font-bold">월간 리포트</h1>
                 </div>
-                <p className="text-sm text-zinc-500">2026년 1월</p>
+                <p className="text-base text-zinc-500 font-bold">2026년 1월</p>
             </div>
 
             {/* Summary Cards */}
@@ -55,16 +55,16 @@ export function Insights() {
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-5 border border-blue-100 shadow-sm">
                     <div className="grid grid-cols-3 gap-4">
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-zinc-900 mb-1">85</div>
-                            <div className="text-xs text-zinc-500 font-medium">총 방문</div>
+                            <div className="text-2xl font-black text-zinc-900 mb-1">85</div>
+                            <div className="text-xs text-zinc-500 font-bold uppercase">총 방문</div>
                         </div>
                         <div className="text-center border-x border-zinc-200">
-                            <div className="text-2xl font-bold text-zinc-900 mb-1">24</div>
-                            <div className="text-xs text-zinc-500 font-medium">새 장소</div>
+                            <div className="text-2xl font-black text-zinc-900 mb-1">24</div>
+                            <div className="text-xs text-zinc-500 font-bold uppercase">새 장소</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-zinc-900 mb-1">2,148</div>
-                            <div className="text-xs text-zinc-500 font-medium">저장된 장소</div>
+                            <div className="text-2xl font-black text-zinc-900 mb-1">2,148</div>
+                            <div className="text-xs text-zinc-500 font-bold uppercase">저장된 장소</div>
                         </div>
                     </div>
                 </div>
@@ -86,9 +86,9 @@ export function Insights() {
                                 <insight.icon className="w-6 h-6" style={{ color: insight.color }} />
                             </div>
                             <div className="flex-1">
-                                <div className="text-xs text-zinc-500 mb-0.5 font-medium">{insight.title}</div>
-                                <div className="text-sm font-bold text-zinc-900 mb-0.5">{insight.value}</div>
-                                <div className="text-xs text-zinc-400">{insight.detail}</div>
+                                <div className="text-xs text-zinc-500 mb-0.5 font-bold uppercase tracking-tight">{insight.title}</div>
+                                <div className="text-base font-bold text-zinc-900 mb-0.5">{insight.value}</div>
+                                <div className="text-xs text-zinc-400 font-bold">{insight.detail}</div>
                             </div>
                         </div>
                     ))}
@@ -105,12 +105,12 @@ export function Insights() {
                                 <div className="flex items-center justify-between mb-2">
                                     <div className="flex items-center gap-2">
                                         <div
-                                            className="w-3 h-3 rounded-full"
+                                            className="w-3.5 h-3.5 rounded-full"
                                             style={{ backgroundColor: item.color }}
                                         />
-                                        <span className="text-sm font-medium text-zinc-700">{item.folder}</span>
+                                        <span className="text-base font-bold text-zinc-700">{item.folder}</span>
                                     </div>
-                                    <span className="text-sm text-zinc-500 font-medium">{item.visits}회</span>
+                                    <span className="text-sm text-zinc-500 font-bold">{item.visits}회</span>
                                 </div>
                                 <div className="relative w-full bg-zinc-100 rounded-full h-2 overflow-hidden">
                                     <div
@@ -141,8 +141,8 @@ export function Insights() {
                                 <Sparkles className="w-5 h-5 text-blue-600" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-sm font-bold text-zinc-900 mb-1">1년 이상 미방문 장소 정리</h3>
-                                <p className="text-xs text-zinc-500">
+                                <h3 className="text-base font-bold text-zinc-900 mb-1">1년 이상 미방문 장소 정리</h3>
+                                <p className="text-sm text-zinc-500 font-medium">
                                     42개 장소를 1년 넘게 방문하지 않았습니다
                                 </p>
                             </div>
@@ -165,8 +165,8 @@ export function Insights() {
                                 <TrendingUp className="w-5 h-5 text-purple-600" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-sm font-bold text-zinc-900 mb-1">새로운 취향 발견</h3>
-                                <p className="text-xs text-zinc-500">
+                                <h3 className="text-base font-bold text-zinc-900 mb-1">새로운 취향 발견</h3>
+                                <p className="text-sm text-zinc-500 font-medium">
                                     최근 갤러리·전시 공간 방문이 증가했습니다
                                 </p>
                             </div>

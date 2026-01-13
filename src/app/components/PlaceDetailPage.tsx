@@ -31,14 +31,14 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
   const currentFolder = getFolderById(place.folderId);
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="bg-white pb-20">
       {/* Header */}
       <div className="sticky top-0 bg-white z-10 border-b border-zinc-200">
         <div className="flex items-center gap-3 p-4">
           <Button variant="ghost" size="icon" onClick={onNavigateBack}>
             <ChevronLeft className="w-6 h-6" />
           </Button>
-          <h1 className="text-lg font-semibold flex-1">장소 상세</h1>
+          <h1 className="text-xl font-bold flex-1 text-center">장소 상세</h1>
           <Button variant="ghost" size="icon">
             <Edit3 className="w-5 h-5" />
           </Button>
@@ -76,17 +76,17 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
               </div>
             )}
             {place.distance && (
-              <span className="text-zinc-500 flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
+              <span className="text-zinc-500 flex items-center gap-1 font-bold text-sm">
+                <MapPin className="w-5 h-5" />
                 {place.distance}
               </span>
             )}
           </div>
 
           {/* Address */}
-          <div className="flex items-start gap-2 mb-4 text-zinc-600">
-            <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-            <p className="text-sm">{place.address}</p>
+          <div className="flex items-start gap-2 mb-4 text-zinc-600 font-medium">
+            <MapPin className="w-5 h-5 flex-shrink-0" />
+            <p className="text-base">{place.address}</p>
           </div>
 
           {/* Tags */}
@@ -97,7 +97,7 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
               </Badge>
             ))}
             {place.aiTags?.map(tag => (
-              <Badge key={tag} variant="outline" className="text-sm text-blue-600 border-blue-200">
+              <Badge key={tag} variant="outline" className="text-sm font-bold text-blue-600 border-blue-200">
                 ✨#{tag}
               </Badge>
             ))}

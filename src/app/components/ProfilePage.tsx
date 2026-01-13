@@ -14,22 +14,22 @@ export function ProfilePage() {
                     </div>
                     <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                            <h1 className="text-xl font-bold text-zinc-900">John Doe</h1>
-                            <Badge className="bg-blue-600 text-[10px] h-5">PRO</Badge>
+                            <h1 className="text-2xl font-bold text-zinc-900">John Doe</h1>
+                            <Badge className="bg-blue-600 text-xs h-5 px-1.5 font-bold">PRO</Badge>
                         </div>
-                        <p className="text-sm text-zinc-500 mb-2">@johndoe</p>
+                        <p className="text-base text-zinc-500 mb-2 font-medium">@johndoe</p>
                         <div className="flex gap-4">
                             <div className="text-center">
-                                <div className="text-sm font-bold">2.1k</div>
-                                <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider">장소</div>
+                                <div className="text-base font-bold">2.1k</div>
+                                <div className="text-xs text-zinc-400 font-bold uppercase tracking-wider">장소</div>
                             </div>
-                            <div className="text-center border-x border-zinc-100 px-4">
-                                <div className="text-sm font-bold">156</div>
-                                <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider">폴더</div>
+                            <div className="text-center border-x border-zinc-100 px-6">
+                                <div className="text-base font-bold">156</div>
+                                <div className="text-xs text-zinc-400 font-bold uppercase tracking-wider">폴더</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-sm font-bold">842</div>
-                                <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider">팔로워</div>
+                                <div className="text-base font-bold">842</div>
+                                <div className="text-xs text-zinc-400 font-bold uppercase tracking-wider">팔로워</div>
                             </div>
                         </div>
                     </div>
@@ -52,15 +52,15 @@ export function ProfilePage() {
                         <div className="w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center mb-2">
                             <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
                         </div>
-                        <div className="text-lg font-bold">42</div>
-                        <div className="text-xs text-zinc-500">작성한 리뷰</div>
+                        <div className="text-2xl font-bold">42</div>
+                        <div className="text-sm text-zinc-500 font-bold">작성한 리뷰</div>
                     </Card>
                     <Card className="p-4 bg-white border-zinc-200 flex flex-col items-center text-center">
                         <div className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center mb-2">
                             <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />
                         </div>
-                        <div className="text-lg font-bold">1.2k</div>
-                        <div className="text-xs text-zinc-500">받은 좋아요</div>
+                        <div className="text-2xl font-bold">1.2k</div>
+                        <div className="text-sm text-zinc-500 font-bold">받은 좋아요</div>
                     </Card>
                 </div>
 
@@ -78,8 +78,8 @@ export function ProfilePage() {
                                 <item.icon className="w-5 h-5 text-zinc-500" />
                             </div>
                             <div className="flex-1 text-left">
-                                <div className="text-sm font-bold text-zinc-900">{item.label}</div>
-                                <div className="text-[11px] text-zinc-400 font-medium">{item.detail}</div>
+                                <div className="text-base font-bold text-zinc-900">{item.label}</div>
+                                <div className="text-xs text-zinc-400 font-bold">{item.detail}</div>
                             </div>
                             <ChevronRight className="w-5 h-5 text-zinc-300" />
                         </button>
@@ -103,7 +103,7 @@ export function ProfilePage() {
             </div>
 
             <div className="px-6 py-4 text-center">
-                <p className="text-[10px] text-zinc-400 font-medium">버전 1.2.4 (Build 452)</p>
+                <p className="text-xs text-zinc-400 font-bold">버전 1.2.4 (Build 452)</p>
             </div>
         </div>
     );

@@ -8,8 +8,8 @@ interface SemanticSearchProps {
 }
 
 export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
-    const [searchValue, setSearchValue] = useState('성수동 조용한 카페 추천해줘');
-    const [activeFilters, setActiveFilters] = useState<string[]>(['4점 이상', '주차 가능']);
+    const [searchValue, setSearchValue] = useState('');
+    const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
     const availableTags = ['조용한', '카공', '디저트 맛집', '반려동물 동반', '테라스', '콘센트'];
 
@@ -87,7 +87,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                     <input
                         type="text"
                         placeholder="어떤 장소를 찾으시나요?"
-                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-12 py-3.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-medium"
+                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-12 py-4 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-bold"
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                     />
@@ -107,7 +107,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                         <button
                             key={tag}
                             onClick={() => toggleFilter(tag)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all border ${activeFilters.includes(tag)
+                            className={`px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all border ${activeFilters.includes(tag)
                                 ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-100'
                                 : 'bg-white border-zinc-200 text-zinc-600 hover:border-blue-300 hover:text-blue-600'
                                 }`}
@@ -120,8 +120,8 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                 {/* Active Filter Badges */}
                 {activeFilters.length > 0 && (
                     <div className="flex items-center gap-2 flex-wrap">
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 uppercase tracking-wider mr-1">
-                            <Filter className="w-3 h-3" />
+                        <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600 uppercase tracking-wider mr-1">
+                            <Filter className="w-4 h-4" />
                             <span>적용됨</span>
                         </div>
                         {activeFilters.map((filter, index) => (
@@ -138,7 +138,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                                     }}
                                     className="p-1 -mr-1 hover:bg-blue-100 rounded-full transition-colors flex items-center justify-center"
                                 >
-                                    <X className="w-3 h-3 text-blue-400 hover:text-blue-700" />
+                                    <X className="w-4 h-4 text-blue-400 hover:text-blue-700" />
                                 </button>
                             </Badge>
                         ))}
@@ -155,8 +155,8 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
             {/* Results Header */}
             <div className="p-6 pb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <h2 className="text-sm font-semibold text-zinc-500">검색 결과</h2>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2.5 py-0.5 rounded-full font-bold">
+                    <h2 className="text-base font-bold text-zinc-500">검색 결과</h2>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">
                         {filteredResults.length}개
                     </span>
                 </div>
@@ -198,14 +198,14 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                             </div>
 
                             {/* Place Info */}
-                            <h3 className="text-base font-bold text-zinc-900 mb-1.5 group-hover:text-blue-600 transition-colors">{place.name}</h3>
-                            <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                            <h3 className="text-lg font-bold text-zinc-900 mb-1.5 group-hover:text-blue-600 transition-colors">{place.name}</h3>
+                            <div className="flex items-center gap-2 text-sm text-zinc-500 mb-4 font-medium">
                                 <div className="flex items-center gap-1">
-                                    <MapPin className="w-3.5 h-3.5 text-zinc-400" />
+                                    <MapPin className="w-4 h-4 text-zinc-400" />
                                     <span>{place.location}</span>
                                 </div>
                                 <span className="text-zinc-300">·</span>
-                                <span className="font-medium">{place.distance}</span>
+                                <span>{place.distance}</span>
                             </div>
 
                             {/* Tags */}
