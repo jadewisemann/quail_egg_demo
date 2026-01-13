@@ -37,7 +37,7 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
 
     return (
       <div key={folderId} className="mb-2">
-        <div 
+        <div
           className="flex items-center gap-2 p-3 hover:bg-zinc-50 rounded-lg cursor-pointer"
           style={{ paddingLeft: `${level * 16 + 12}px` }}
           onClick={() => onNavigateToFolder(folderId)}
@@ -169,32 +169,10 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
       {/* Floating Action Button */}
       <Button
         size="lg"
-        className="fixed bottom-20 right-4 rounded-full w-14 h-14 shadow-lg"
+        className="fixed bottom-24 right-4 rounded-full w-14 h-14 shadow-lg z-40"
       >
         <Plus className="w-6 h-6" />
       </Button>
-
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-zinc-200 px-4 py-2">
-        <div className="flex justify-around items-center">
-          <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Home className="w-6 h-6 text-blue-600" />
-            <span className="text-xs text-blue-600">홈</span>
-          </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Map className="w-6 h-6 text-zinc-400" />
-            <span className="text-xs text-zinc-400">지도 뷰</span>
-          </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Compass className="w-6 h-6 text-zinc-400" />
-            <span className="text-xs text-zinc-400">탐색</span>
-          </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Settings className="w-6 h-6 text-zinc-400" />
-            <span className="text-xs text-zinc-400">설정</span>
-          </Button>
-        </div>
-      </div>
     </div>
   );
 }
