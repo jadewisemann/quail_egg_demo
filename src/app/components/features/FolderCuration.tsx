@@ -3,9 +3,14 @@ import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 
-export function FolderCuration() {
+interface FolderCurationProps {
+    onNavigateToPlace: (placeId: string) => void;
+}
+
+export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
     const topPicks = [
         {
+            id: '1',
             name: '성수 카페 온리',
             location: '성수동',
             matchScore: 98,
@@ -16,20 +21,22 @@ export function FolderCuration() {
             image: '☕',
         },
         {
-            name: '망원 코워킹 스페이스',
-            location: '망원동',
+            id: '2',
+            name: '한남동 브런치 카페',
+            location: '한남동',
             matchScore: 95,
-            rating: 5,
+            rating: 4,
             distance: '2.8km',
             reason: '월요일 오전 방문 패턴 일치',
             features: ['와이파이', '회의실', '무료음료'],
             image: '💼',
         },
         {
-            name: '한남동 북카페',
-            location: '한남동',
+            id: '3',
+            name: '망원 로스터리',
+            location: '망원동',
             matchScore: 92,
-            rating: 4,
+            rating: 5,
             distance: '3.1km',
             reason: '조용한 환경 선호도 반영',
             features: ['조용함', '콘센트', '장시간'],
@@ -39,7 +46,8 @@ export function FolderCuration() {
 
     return (
         <div className="min-h-screen bg-white pb-20">
-            {/* Header */}
+            {/* Header / content ... */}
+            {/* skipping some lines for brevity in replacement but making sure it's contiguous */}
             <div className="p-6 pb-4">
                 <div className="flex items-center gap-2 mb-2">
                     <Coffee className="w-6 h-6 text-amber-400" />
@@ -138,7 +146,10 @@ export function FolderCuration() {
 
                             {/* Action Button */}
                             <div className="px-4 pb-4">
-                                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl">
+                                <Button
+                                    onClick={() => onNavigateToPlace(place.id)}
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+                                >
                                     자세히 보기
                                 </Button>
                             </div>
@@ -146,6 +157,7 @@ export function FolderCuration() {
                     ))}
                 </div>
             </div>
+
 
             {/* More Options */}
             <div className="px-6 mt-6">

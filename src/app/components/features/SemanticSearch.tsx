@@ -2,7 +2,11 @@ import { Search, Sparkles, Star, MapPin, Folder, X } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
 
-export function SemanticSearch() {
+interface SemanticSearchProps {
+    onNavigateToPlace: (placeId: string) => void;
+}
+
+export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
     const activeFilters = [
         '4점 이상',
         '주차 가능',
@@ -10,6 +14,7 @@ export function SemanticSearch() {
 
     const results = [
         {
+            id: '1',
             name: '성수 카페 온리',
             folder: '업무하기 좋은',
             folderColor: '#eab308', // amber-500
@@ -19,6 +24,7 @@ export function SemanticSearch() {
             tags: ['주차', '콘센트', '조용함'],
         },
         {
+            id: '2',
             name: '한남동 브런치 카페',
             folder: '좋아하는 카페',
             folderColor: '#ec4899', // pink-500
@@ -28,6 +34,7 @@ export function SemanticSearch() {
             tags: ['주차', '브런치', '분위기'],
         },
         {
+            id: '3',
             name: '망원 로스터리',
             folder: '좋아하는 카페',
             folderColor: '#ec4899', // pink-500
@@ -37,6 +44,7 @@ export function SemanticSearch() {
             tags: ['주차', '스페셜티', '넓음'],
         },
         {
+            id: '4',
             name: '이태원 갤러리 카페',
             folder: '데이트 장소',
             folderColor: '#a855f7', // purple-500
@@ -98,6 +106,7 @@ export function SemanticSearch() {
                 {results.map((place, index) => (
                     <div
                         key={index}
+                        onClick={() => onNavigateToPlace(place.id)}
                         className="bg-white rounded-2xl p-4 border border-zinc-200 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer"
                     >
                         {/* Folder Badge */}
@@ -143,6 +152,7 @@ export function SemanticSearch() {
                     </div>
                 ))}
             </div>
+
 
             {/* Search Suggestions */}
             <div className="px-6 pb-6">

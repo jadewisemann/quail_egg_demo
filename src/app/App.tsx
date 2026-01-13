@@ -7,6 +7,7 @@ import { EmptyState } from '@/app/components/EmptyState';
 import { FolderCuration } from '@/app/components/features/FolderCuration';
 import { SemanticSearch } from '@/app/components/features/SemanticSearch';
 import { Insights } from '@/app/components/features/Insights';
+import { ProfilePage } from '@/app/components/ProfilePage';
 import { mockPlaces } from '@/app/mockData';
 
 type View =
@@ -16,7 +17,8 @@ type View =
   | { type: 'place'; placeId: string }
   | { type: 'search' }
   | { type: 'curation' }
-  | { type: 'insights' };
+  | { type: 'insights' }
+  | { type: 'profile' };
 
 type Tab = 'home' | 'search' | 'curation' | 'insights' | 'profile';
 
@@ -48,6 +50,7 @@ export default function App() {
       if (previousView.type === 'search') setActiveTab('search');
       if (previousView.type === 'curation') setActiveTab('curation');
       if (previousView.type === 'insights') setActiveTab('insights');
+      if (previousView.type === 'profile') setActiveTab('profile');
     } else {
       // Default fallback
       setCurrentView({ type: 'home' });
@@ -85,6 +88,9 @@ export default function App() {
         break;
       case 'insights':
         setCurrentView({ type: 'insights' });
+        break;
+      case 'profile':
+        setCurrentView({ type: 'profile' });
         break;
       default:
         break;
@@ -127,11 +133,13 @@ export default function App() {
           />
         );
       case 'search':
-        return <SemanticSearch />;
+        return <SemanticSearch onNavigateToPlace={navigateToPlace} />;
       case 'curation':
-        return <FolderCuration />;
+        return <FolderCuration onNavigateToPlace={navigateToPlace} />;
       case 'insights':
         return <Insights />;
+      case 'profile':
+        return <ProfilePage />;
       default:
         return null;
     }
@@ -181,7 +189,8 @@ export default function App() {
           </button>
 
           <button
-            className="flex flex-col items-center gap-1 w-full h-full justify-center text-zinc-400"
+            onClick={() => handleTabChange('profile')}
+            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'profile' ? 'text-blue-600' : 'text-zinc-400'}`}
           >
             <User className="w-6 h-6" />
             <span className="text-[10px] font-medium">프로필</span>
