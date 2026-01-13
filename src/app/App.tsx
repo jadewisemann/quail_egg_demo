@@ -138,7 +138,7 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-white relative pb-[60px]">
+    <div className="max-w-2xl mx-auto min-h-screen bg-white relative pb-[60px] shadow-sm">
 
       {/* Main Content Area */}
       <div className="min-h-screen">
@@ -146,7 +146,7 @@ export default function App() {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-zinc-200 z-50">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 z-50">
         <div className="flex justify-around items-center h-[60px] pb-1">
           <button
             onClick={() => handleTabChange('home')}

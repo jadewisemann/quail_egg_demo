@@ -210,7 +210,7 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
       </div>
 
       {/* Bottom Fixed Action Bar */}
-      <div className="fixed bottom-[60px] left-0 right-0 bg-white border-t border-zinc-200 p-4 max-w-md mx-auto">
+      <div className="fixed bottom-[60px] left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 p-4 z-40">
         <div className="flex gap-3">
           <Button variant="outline" className="flex-1 h-12">
             <Edit3 className="w-4 h-4 mr-2" />
