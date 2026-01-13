@@ -1,4 +1,4 @@
-import { ChevronLeft, MapPin, Star, Edit3, Navigation, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronLeft, MapPin, Star, Edit3, Navigation, ChevronRight, Sparkles, X, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
@@ -6,6 +6,7 @@ import { Textarea } from '@/app/components/ui/textarea';
 import { getPlaceById, getFolderById, mockFolders } from '@/app/mockData';
 import { Card } from '@/app/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { SafeImage } from '@/app/components/ui/SafeImage';
 
 interface PlaceDetailPageProps {
   placeId: string;
@@ -16,6 +17,9 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
   const place = getPlaceById(placeId);
   const [memo, setMemo] = useState(place?.memo || '');
   const [selectedFolder, setSelectedFolder] = useState(place?.folderId || '');
+  const [tags, setTags] = useState<string[]>(place?.tags || []);
+  const [newTag, setNewTag] = useState('');
+  const [isTagInputVisible, setIsTagInputVisible] = useState(false);
 
   if (!place) {
     return (
@@ -30,8 +34,20 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
 
   const currentFolder = getFolderById(place.folderId);
 
+  const handleAddTag = () => {
+    const trimmedTag = newTag.trim();
+    if (trimmedTag && !tags.includes(trimmedTag)) {
+      setTags([...tags, trimmedTag]);
+      setNewTag('');
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
+
   return (
-    <div className="bg-white pb-20">
+    <div className="bg-white pb-48">
       {/* Header */}
       <div className="sticky top-0 bg-white z-10 border-b border-zinc-200">
         <div className="flex items-center gap-3 p-4">
@@ -49,10 +65,10 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
       <div>
         {/* Place Image */}
         <div className="relative">
-          <img
+          <SafeImage
             src={place.image}
             alt={place.name}
-            className="w-full h-64 object-cover"
+            className="w-full h-80 object-cover"
           />
           {place.isOpen !== undefined && (
             <div className="absolute top-4 right-4">
@@ -89,18 +105,71 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
             <p className="text-base">{place.address}</p>
           </div>
 
-          {/* Tags */}
-          <div className="flex gap-2 flex-wrap mb-6">
-            {place.tags.map(tag => (
-              <Badge key={tag} variant="secondary" className="text-sm">
-                #{tag}
-              </Badge>
-            ))}
-            {place.aiTags?.map(tag => (
-              <Badge key={tag} variant="outline" className="text-sm font-bold text-blue-600 border-blue-200">
-                ✨#{tag}
-              </Badge>
-            ))}
+          {/* Tags Section */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-sm font-bold text-zinc-900">태그 관리</label>
+              <button
+                onClick={() => setIsTagInputVisible(!isTagInputVisible)}
+                className="text-xs font-bold text-brand flex items-center gap-1 px-3 py-1.5 bg-brand-light rounded-lg hover:bg-brand/20 transition-colors"
+              >
+                {isTagInputVisible ? (
+                  <>
+                    <X className="w-3.5 h-3.5" />
+                    닫기
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-3.5 h-3.5" />
+                    태그 추가
+                  </>
+                )}
+              </button>
+            </div>
+
+            <div className="flex gap-2 flex-wrap mb-3">
+              {tags.map(tag => (
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className="pl-3 pr-1.5 py-1 text-sm font-bold bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors flex items-center gap-1 group"
+                >
+                  #{tag}
+                  <button
+                    onClick={() => handleRemoveTag(tag)}
+                    className="p-0.5 rounded-full hover:bg-zinc-300 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </Badge>
+              ))}
+              {place.aiTags?.map(tag => (
+                <Badge key={tag} variant="outline" className="px-3 py-1 text-sm font-bold text-brand border-brand/20 bg-brand-light">
+                  ✨#{tag}
+                </Badge>
+              ))}
+            </div>
+
+            {/* Add Tag Input (Conditional) */}
+            {isTagInputVisible && (
+              <div className="relative animate-in slide-in-from-top-2 duration-200">
+                <input
+                  type="text"
+                  value={newTag}
+                  autoFocus
+                  onChange={(e) => setNewTag(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
+                  placeholder="새 태그 입력 (Enter)"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-4 pr-10 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-400 font-medium transition-all"
+                />
+                <button
+                  onClick={handleAddTag}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors shadow-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* My Memo */}
@@ -145,7 +214,7 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
             {/* AI Folder Suggestions */}
             <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
               <div className="flex items-center gap-2 mb-2">
-                <Sparkles className="w-4 h-4 text-blue-600" />
+                <Sparkles className="w-4 h-4 text-brand" />
                 <span className="text-sm font-medium text-blue-900">AI 추천 폴더</span>
               </div>
               <div className="flex gap-2">
@@ -206,20 +275,6 @@ export function PlaceDetailPage({ placeId, onNavigateBack }: PlaceDetailPageProp
               </div>
             </div>
           </Card>
-        </div>
-      </div>
-
-      {/* Bottom Fixed Action Bar */}
-      <div className="fixed bottom-[60px] left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 p-4 z-40">
-        <div className="flex gap-3">
-          <Button variant="outline" className="flex-1 h-12">
-            <Edit3 className="w-4 h-4 mr-2" />
-            정보 수정
-          </Button>
-          <Button className="flex-1 h-12 bg-blue-600 hover:bg-blue-700">
-            <Navigation className="w-4 h-4 mr-2" />
-            길찾기
-          </Button>
         </div>
       </div>
     </div>

@@ -2,10 +2,11 @@ import { ChevronRight, ChevronDown, ChevronLeft, List, MapPin, Edit3, MoreVertic
 import { useState } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
-import { getSubFolders, getPlacesByFolder, getBreadcrumbs, getFolderById, getAllPlacesRecursive } from '@/app/mockData';
+import { getSubFolders, getPlacesByFolder, getBreadcrumbs, getFolderById, getAllPlacesRecursive, getRecursivePlaceCount } from '@/app/mockData';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/app/components/ui/collapsible';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/app/components/ui/breadcrumb';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/app/components/ui/dropdown-menu';
+import { SafeImage } from '@/app/components/ui/SafeImage';
 
 interface ListDetailPageProps {
   folderId: string;
@@ -52,7 +53,7 @@ export function ListDetailPage({
           </Button>
           <div className="flex-1 min-w-0">
             <h1 className="text-xl font-bold truncate text-zinc-900">{currentFolder?.name}</h1>
-            <p className="text-sm text-zinc-500 font-bold">{recursivePlaces.length}개의 장소 · {subFolders.length}개 폴더</p>
+            <p className="text-sm text-zinc-500 font-bold">총 {recursivePlaces.length}개의 장소 리스트</p>
           </div>
           <Button
             variant={editMode ? "default" : "ghost"}
@@ -173,7 +174,7 @@ export function ListDetailPage({
 
             {/* Current Location */}
             <div className="absolute top-4 left-4 z-20">
-              <Button size="icon" className="bg-white/95 text-blue-600 backdrop-blur shadow-md rounded-2xl border border-zinc-100 w-10 h-10 hover:bg-white active:scale-95 transition-transform">
+              <Button size="icon" className="bg-white/95 text-brand backdrop-blur shadow-md rounded-2xl border border-zinc-100 w-10 h-10 hover:bg-white active:scale-95 transition-transform">
                 <MapPin className="w-5 h-5 fill-blue-50" />
               </Button>
             </div>
@@ -194,7 +195,7 @@ export function ListDetailPage({
                       >
                         <span className="text-lg">{place.folderIcon}</span>
                       </div>
-                      <img
+                      <SafeImage
                         src={place.image}
                         alt={place.name}
                         className="w-32 h-32 object-cover flex-shrink-0"
@@ -254,7 +255,7 @@ export function ListDetailPage({
                       <span className="text-3xl">{folder.icon}</span>
                       <div className="flex-1">
                         <h4 className="font-bold text-base text-zinc-800">{folder.name}</h4>
-                        <p className="text-sm text-zinc-500 font-medium">{folder.placeCount}개의 장소</p>
+                        <p className="text-sm text-zinc-500 font-medium">{getRecursivePlaceCount(folder.id)}개의 장소</p>
                       </div>
                       <ChevronRight className="w-5 h-5 text-zinc-400" />
                     </div>
@@ -264,20 +265,25 @@ export function ListDetailPage({
             )}
 
             {/* Places */}
-            {places.length > 0 && (
+            {(places.length > 0 || (subFolders.length > 0 && recursivePlaces.length > 0)) && (
               <div>
-                <h3 className="text-sm font-medium text-zinc-500 mb-3 flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  장소 ({places.length})
+                <h3 className="text-sm font-bold text-zinc-900 mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-brand" />
+                    <span>장소 목록</span>
+                  </div>
+                  <span className="text-xs text-zinc-400 font-medium">
+                    {places.length > 0 ? `${places.length}개 직접 저장됨` : `전체 ${recursivePlaces.length}개`}
+                  </span>
                 </h3>
                 <div className="space-y-3">
-                  {places.map(place => (
+                  {(places.length > 0 ? places : recursivePlaces).map(place => (
                     <div
                       key={place.id}
                       className="flex gap-3 p-3 bg-white border border-zinc-200 rounded-lg cursor-pointer hover:shadow-md transition-shadow"
                       onClick={() => onNavigateToPlace(place.id)}
                     >
-                      <img
+                      <SafeImage
                         src={place.image}
                         alt={place.name}
                         className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
@@ -319,7 +325,7 @@ export function ListDetailPage({
                             </Badge>
                           ))}
                           {place.aiTags?.map(tag => (
-                            <Badge key={tag} variant="outline" className="text-xs font-bold text-blue-600 border-blue-200">
+                            <Badge key={tag} variant="outline" className="text-xs font-bold text-brand border-brand/20 bg-brand-light">
                               ✨#{tag}
                             </Badge>
                           ))}

@@ -39,17 +39,17 @@ export function ComparePlaces() {
 
             {/* AI Final Pick */}
             <div className="p-6 pb-4">
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-5 border border-blue-100 relative overflow-hidden shadow-sm">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 rounded-full blur-3xl" />
+                <div className="bg-gradient-to-r from-brand-light to-zinc-50 rounded-2xl p-5 border border-brand/20 relative overflow-hidden shadow-sm transition-colors">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-3xl transition-colors" />
 
                     <div className="relative flex items-center gap-3">
-                        <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-200">
+                        <div className="w-12 h-12 bg-brand rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand/20 transition-colors">
                             <Zap className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
                             <div className="text-xs font-bold text-zinc-500 mb-1">AI 최종 추천</div>
                             <div className="text-base font-bold text-zinc-900">{aiPick.name}</div>
-                            <div className="text-xs text-blue-700 font-semibold mt-1">
+                            <div className="text-xs text-brand font-semibold mt-1">
                                 방문 기록과 현재 혼잡도 기준 최적
                             </div>
                         </div>
@@ -61,10 +61,10 @@ export function ComparePlaces() {
             <div className="px-6 space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                     {/* Place 1 */}
-                    <div className={`bg-white rounded-2xl overflow-hidden border-2 transition-all ${aiPick === place1 ? 'border-blue-500 shadow-md transform scale-[1.02]' : 'border-zinc-100 shadow-sm'
+                    <div className={`bg-white rounded-2xl overflow-hidden border-2 transition-all ${aiPick === place1 ? 'border-brand shadow-md transform scale-[1.02]' : 'border-zinc-100 shadow-sm'
                         }`}>
                         {aiPick === place1 && (
-                            <div className="bg-blue-500 text-white text-center py-1.5 text-xs font-bold">
+                            <div className="bg-brand text-white text-center py-1.5 text-xs font-bold transition-colors">
                                 ✨ AI 추천
                             </div>
                         )}
@@ -91,7 +91,7 @@ export function ComparePlaces() {
                                 {/* Visit Count */}
                                 <div>
                                     <div className="text-xs text-zinc-400 mb-1 text-center font-medium">방문 횟수</div>
-                                    <div className="text-xl text-center font-bold text-blue-600">{place1.visitCount}회</div>
+                                    <div className="text-xl text-center font-bold text-brand transition-colors">{place1.visitCount}회</div>
                                 </div>
 
                                 {/* Last Visit */}
@@ -122,10 +122,10 @@ export function ComparePlaces() {
                     </div>
 
                     {/* Place 2 */}
-                    <div className={`bg-white rounded-2xl overflow-hidden border-2 transition-all ${aiPick === place2 ? 'border-blue-500 shadow-md transform scale-[1.02]' : 'border-zinc-100 shadow-sm'
+                    <div className={`bg-white rounded-2xl overflow-hidden border-2 transition-all ${aiPick === place2 ? 'border-brand shadow-md transform scale-[1.02]' : 'border-zinc-100 shadow-sm'
                         }`}>
                         {aiPick === place2 && (
-                            <div className="bg-blue-500 text-white text-center py-1.5 text-xs font-bold">
+                            <div className="bg-brand text-white text-center py-1.5 text-xs font-bold transition-colors">
                                 ✨ AI 추천
                             </div>
                         )}
@@ -219,7 +219,7 @@ export function ComparePlaces() {
 
                 {/* Action Buttons */}
                 <div className="grid grid-cols-2 gap-3 pt-2">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl h-11">
+                    <Button className="w-full bg-brand hover:bg-brand-hover text-white rounded-xl h-11 transition-all">
                         {place1.name.split(' ')[0]} 선택
                     </Button>
                     <Button variant="outline" className="w-full border-zinc-200 text-zinc-600 hover:bg-zinc-50 rounded-xl h-11">

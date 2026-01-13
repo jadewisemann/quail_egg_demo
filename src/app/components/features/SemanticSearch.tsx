@@ -1,67 +1,47 @@
 import { Search, Sparkles, Star, MapPin, Folder, X, Filter } from 'lucide-react';
-import { useState, useMemo } from 'react';
-import { Button } from '@/app/components/ui/button';
+import { useState, useMemo, useEffect } from 'react';
 import { Badge } from '@/app/components/ui/badge';
+import { mockPlaces, mockFolders } from '@/app/mockData';
+import { Place } from '@/app/types';
+import { hangulIncludes } from '@/app/utils/hangul';
 
 interface SemanticSearchProps {
     onNavigateToPlace: (placeId: string) => void;
+    initialQuery?: string;
 }
 
-export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
-    const [searchValue, setSearchValue] = useState('');
+export function SemanticSearch({ onNavigateToPlace, initialQuery = '' }: SemanticSearchProps) {
+    const [searchValue, setSearchValue] = useState(initialQuery);
     const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
-    const availableTags = ['조용한', '카공', '디저트 맛집', '반려동물 동반', '테라스', '콘센트'];
-
-    const allResults = [
-        {
-            id: 'p1',
-            name: '성수 카페 온리',
-            folder: '업무하기 좋은',
-            folderColor: '#eab308',
-            location: '성수동',
-            rating: 5,
-            distance: '1.2km',
-            tags: ['주차', '콘센트', '조용한', '4점 이상'],
-        },
-        {
-            id: 'p2',
-            name: '한남동 브런치 카페',
-            folder: '좋아하는 카페',
-            folderColor: '#ec4899',
-            location: '한남동',
-            rating: 4,
-            distance: '2.3km',
-            tags: ['주차', '브런치', '분위기', '4점 이상'],
-        },
-        {
-            id: 'p3',
-            name: '망원 로스터리',
-            folder: '좋아하는 카페',
-            folderColor: '#ec4899',
-            location: '망원동',
-            rating: 5,
-            distance: '3.1km',
-            tags: ['주차', '스페셜티', '넓음', '4점 이상'],
-        },
-        {
-            id: 'p4',
-            name: '연남동 작업실',
-            folder: '업무하기 좋은',
-            folderColor: '#eab308',
-            location: '연남동',
-            rating: 5,
-            distance: '4.5km',
-            tags: ['콘센트', '조용한', '카공', '4점 이상'],
+    useEffect(() => {
+        if (initialQuery !== undefined) {
+            setSearchValue(initialQuery);
+            setActiveFilters([]); // Ensure no tags are pre-selected when navigating from outside
         }
-    ];
+    }, [initialQuery]);
+
+    const availableTags = ['카공', '조용함', '데이트', '주차', '베이커리', '루프탑', '콘센트많음', '분위기'];
 
     const filteredResults = useMemo(() => {
-        if (activeFilters.length === 0) return allResults;
-        return allResults.filter(place =>
-            activeFilters.every(filter => place.tags.includes(filter) || place.name.includes(filter))
-        );
-    }, [activeFilters]);
+        return mockPlaces.filter((place: Place) => {
+            const searchLower = searchValue.toLowerCase();
+            const matchesSearch = searchValue === '' ||
+                hangulIncludes(place.name, searchValue) ||
+                hangulIncludes(place.address, searchValue) ||
+                place.tags.some((t: string) => hangulIncludes(t, searchValue)) ||
+                (place.memo && hangulIncludes(place.memo, searchValue));
+
+            const matchesFilters = activeFilters.length === 0 ||
+                activeFilters.every((filter: string) =>
+                    place.tags.some((t: string) => hangulIncludes(t, filter)) ||
+                    (place.aiTags && place.aiTags.some((t: string) => hangulIncludes(t, filter))) ||
+                    hangulIncludes(place.name, filter)
+                );
+
+            return matchesSearch && matchesFilters;
+        });
+    }, [searchValue, activeFilters]);
 
     const toggleFilter = (filter: string) => {
         setActiveFilters(prev =>
@@ -73,9 +53,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
 
     const handleSuggestionClick = (suggestion: string) => {
         setSearchValue(suggestion);
-        // Extract plausible tags from suggestion for demo purposes
-        if (suggestion.includes('조용')) toggleFilter('조용한');
-        if (suggestion.includes('콘센트')) toggleFilter('콘센트');
+        setActiveFilters([]); // Clear any existing filters when clicking a suggestion
     };
 
     return (
@@ -87,7 +65,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                     <input
                         type="text"
                         placeholder="어떤 장소를 찾으시나요?"
-                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-12 py-4 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-bold"
+                        className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-12 py-4 text-base focus:border-brand focus:ring-2 focus:ring-brand-light focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-bold"
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                     />
@@ -128,7 +106,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                             <Badge
                                 key={index}
                                 variant="outline"
-                                className="bg-blue-50 text-blue-700 border-blue-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1.5 font-medium animate-in fade-in zoom-in duration-200"
+                                className="bg-brand-light text-brand border-brand/20 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1.5 font-medium animate-in fade-in zoom-in duration-200"
                             >
                                 <span>{filter}</span>
                                 <button
@@ -136,9 +114,9 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                                         e.stopPropagation();
                                         toggleFilter(filter);
                                     }}
-                                    className="p-1 -mr-1 hover:bg-blue-100 rounded-full transition-colors flex items-center justify-center"
+                                    className="p-1 -mr-1 hover:bg-brand/20 rounded-full transition-colors flex items-center justify-center"
                                 >
-                                    <X className="w-4 h-4 text-blue-400 hover:text-blue-700" />
+                                    <X className="w-4 h-4 text-brand/60 hover:text-brand" />
                                 </button>
                             </Badge>
                         ))}
@@ -156,13 +134,13 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
             <div className="p-6 pb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <h2 className="text-base font-bold text-zinc-500">검색 결과</h2>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">
+                    <span className="text-xs bg-brand-light text-brand px-3 py-1 rounded-full font-bold">
                         {filteredResults.length}개
                     </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100/50">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                    <span className="text-[11px] text-blue-700 font-bold">AI 최적화</span>
+                <div className="flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-brand-light to-zinc-50 rounded-full border border-brand/20">
+                    <Sparkles className="w-3.5 h-3.5 text-brand" />
+                    <span className="text-[11px] text-brand font-bold">AI 최적화</span>
                 </div>
             </div>
 
@@ -177,35 +155,40 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                         >
                             {/* Folder Badge & Rating */}
                             <div className="flex items-center justify-between mb-3">
-                                <div
-                                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold"
-                                    style={{
-                                        backgroundColor: `${place.folderColor}15`,
-                                        color: place.folderColor,
-                                    }}
-                                >
-                                    <Folder className="w-3 h-3" />
-                                    <span>{place.folder}</span>
-                                </div>
+                                {(() => {
+                                    const folder = mockFolders.find(f => f.id === place.folderId);
+                                    return (
+                                        <div
+                                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold"
+                                            style={{
+                                                backgroundColor: `${folder?.color || '#3b82f6'}15`,
+                                                color: folder?.color || '#3b82f6',
+                                            }}
+                                        >
+                                            <Folder className="w-3 h-3" />
+                                            <span>{folder?.name || '기본'}</span>
+                                        </div>
+                                    );
+                                })()}
                                 <div className="flex items-center gap-0.5">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
                                             key={i}
-                                            className={`w-3.5 h-3.5 ${i < place.rating ? 'fill-amber-400 text-amber-400' : 'fill-zinc-100 text-zinc-200'}`}
+                                            className={`w-3.5 h-3.5 ${place.rating && i < place.rating ? 'fill-amber-400 text-amber-400' : 'fill-zinc-100 text-zinc-200'}`}
                                         />
                                     ))}
                                 </div>
                             </div>
 
                             {/* Place Info */}
-                            <h3 className="text-lg font-bold text-zinc-900 mb-1.5 group-hover:text-blue-600 transition-colors">{place.name}</h3>
+                            <h3 className="text-lg font-bold text-zinc-900 mb-1.5 group-hover:text-brand transition-colors">{place.name}</h3>
                             <div className="flex items-center gap-2 text-sm text-zinc-500 mb-4 font-medium">
                                 <div className="flex items-center gap-1">
                                     <MapPin className="w-4 h-4 text-zinc-400" />
-                                    <span>{place.location}</span>
+                                    <span className="truncate max-w-[200px]">{place.address}</span>
                                 </div>
                                 <span className="text-zinc-300">·</span>
-                                <span>{place.distance}</span>
+                                <span className="whitespace-nowrap">{place.distance}</span>
                             </div>
 
                             {/* Tags */}
@@ -227,7 +210,7 @@ export function SemanticSearch({ onNavigateToPlace }: SemanticSearchProps) {
                         <p className="text-sm font-medium text-zinc-400">필터에 맞는 장소가 없습니다</p>
                         <button
                             onClick={() => setActiveFilters([])}
-                            className="mt-4 text-xs font-bold text-blue-600 hover:underline"
+                            className="mt-4 text-xs font-bold text-brand hover:underline"
                         >
                             필터 초기화하기
                         </button>

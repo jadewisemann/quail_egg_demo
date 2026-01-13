@@ -4,16 +4,18 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Badge } from '@/app/components/ui/badge';
 import { Card } from '@/app/components/ui/card';
-import { mockFolders, mockPlaces, getSubFolders, getPlacesByFolder } from '@/app/mockData';
+import { mockFolders, mockPlaces, getSubFolders, getPlacesByFolder, getRecursivePlaceCount } from '@/app/mockData';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/app/components/ui/collapsible';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import { SafeImage } from '@/app/components/ui/SafeImage';
 
 interface HomePageProps {
   onNavigateToFolder: (folderId: string) => void;
   onNavigateToPlace: (placeId: string) => void;
+  onSearchTrigger: (query: string) => void;
 }
 
-export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProps) {
+export function HomePage({ onNavigateToFolder, onNavigateToPlace, onSearchTrigger }: HomePageProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
@@ -56,7 +58,7 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
           <span className="text-2xl">{folder?.icon}</span>
           <span className="flex-1 text-left text-base font-medium">{folder?.name}</span>
           <span className="text-[13px] text-zinc-400 font-medium">
-            {folder?.placeCount}개
+            {getRecursivePlaceCount(folderId)}개
           </span>
         </div>
         {isExpanded && (
@@ -69,7 +71,7 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
                 style={{ paddingLeft: `${(level + 1) * 16 + 40}px` }}
                 onClick={() => onNavigateToPlace(place.id)}
               >
-                <img src={place.image} alt={place.name} className="w-14 h-14 rounded-xl object-cover shadow-sm" />
+                <SafeImage src={place.image} alt={place.name} className="w-14 h-14 rounded-xl object-cover shadow-sm" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <h4 className="font-bold text-base truncate text-zinc-900">{place.name}</h4>
@@ -108,7 +110,17 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
               type="text"
               placeholder="강남역 조용한 카페, 저장한 파스타집..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (e.target.value.length >= 1) {
+                  onSearchTrigger(e.target.value);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  onSearchTrigger(searchQuery);
+                }
+              }}
               className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl pl-12 pr-4 py-4 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-zinc-900 placeholder:text-zinc-500 transition-all font-medium"
             />
           </div>
@@ -150,7 +162,7 @@ export function HomePage({ onNavigateToFolder, onNavigateToPlace }: HomePageProp
                 <div className="flex flex-col items-center text-center">
                   <span className="text-5xl mb-3 filter drop-shadow-sm">{folder.icon}</span>
                   <h3 className="font-bold text-base mb-1 text-zinc-800">{folder.name}</h3>
-                  <p className="text-sm text-zinc-400 font-medium">{folder.placeCount}개의 장소</p>
+                  <p className="text-sm text-zinc-400 font-medium">{getRecursivePlaceCount(folder.id)}개의 장소</p>
                 </div>
               </Card>
             ))}

@@ -44,7 +44,7 @@ export function Insights() {
             {/* Header */}
             <div className="p-6 pb-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <BarChart3 className="w-7 h-7 text-blue-600" />
+                    <BarChart3 className="w-7 h-7 text-brand" />
                     <h1 className="text-2xl font-bold">월간 리포트</h1>
                 </div>
                 <p className="text-base text-zinc-500 font-bold">2026년 1월</p>
@@ -52,7 +52,7 @@ export function Insights() {
 
             {/* Summary Cards */}
             <div className="px-6 mb-6">
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-5 border border-blue-100 shadow-sm">
+                <div className="bg-gradient-to-br from-brand-light to-zinc-50 rounded-2xl p-5 border border-brand/20 shadow-sm">
                     <div className="grid grid-cols-3 gap-4">
                         <div className="text-center">
                             <div className="text-2xl font-black text-zinc-900 mb-1">85</div>
@@ -137,8 +137,8 @@ export function Insights() {
 
                     <div className="relative">
                         <div className="flex items-start gap-3 mb-4">
-                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <Sparkles className="w-5 h-5 text-blue-600" />
+                            <div className="w-10 h-10 bg-brand-light rounded-xl flex items-center justify-center flex-shrink-0 transition-colors">
+                                <Sparkles className="w-5 h-5 text-brand" />
                             </div>
                             <div className="flex-1">
                                 <h3 className="text-base font-bold text-zinc-900 mb-1">1년 이상 미방문 장소 정리</h3>
@@ -148,7 +148,7 @@ export function Insights() {
                             </div>
                         </div>
 
-                        <Button variant="outline" className="w-full bg-blue-50/50 border-blue-200 text-blue-600 hover:bg-blue-100 hover:text-blue-700 rounded-xl h-10">
+                        <Button variant="outline" className="w-full bg-brand-light border-brand/20 text-brand hover:bg-brand/10 hover:text-brand-hover rounded-xl h-10 transition-colors">
                             <Archive className="w-4 h-4 mr-2" />
                             보관함으로 이동
                         </Button>

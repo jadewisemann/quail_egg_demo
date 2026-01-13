@@ -58,11 +58,11 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
 
             {/* AI Curation Header */}
             <div className="px-6 mb-6">
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-5 border border-blue-100 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 rounded-full blur-3xl" />
+                <div className="bg-gradient-to-r from-brand-light to-zinc-50 rounded-2xl p-5 border border-brand/20 relative overflow-hidden transition-colors">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-3xl transition-colors" />
 
                     <div className="relative flex items-start gap-3">
-                        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-200">
+                        <div className="w-10 h-10 bg-brand rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand/20 transition-colors">
                             <Sparkles className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1">
@@ -83,10 +83,10 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
                     {topPicks.map((place, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-blue-400 transition-colors shadow-sm"
+                            className="bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-brand/40 transition-colors shadow-sm"
                         >
                             {/* Match Score Badge */}
-                            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 relative text-white">
+                            <div className="bg-gradient-to-r from-brand to-brand-hover p-4 relative text-white transition-all">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
                                 <div className="relative flex items-center justify-between">
                                     <div className="flex items-center gap-3">
@@ -122,10 +122,10 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
                                 {/* AI Reason */}
                                 <div className="bg-zinc-50 rounded-xl p-4 mb-4 border border-zinc-100">
                                     <div className="flex items-start gap-2">
-                                        <Zap className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                                        <Zap className="w-5 h-5 text-brand flex-shrink-0 mt-0.5" />
                                         <div>
                                             <div className="text-xs text-zinc-500 mb-1 font-bold uppercase">AI가 선택한 이유</div>
-                                            <div className="text-sm text-blue-800 font-bold leading-relaxed">{place.reason}</div>
+                                            <div className="text-sm text-brand-hover font-bold leading-relaxed">{place.reason}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ export function FolderCuration({ onNavigateToPlace }: FolderCurationProps) {
                             <div className="px-4 pb-4">
                                 <Button
                                     onClick={() => onNavigateToPlace(place.id)}
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+                                    className="w-full bg-brand hover:bg-brand-hover text-white rounded-xl transition-all"
                                 >
                                     자세히 보기
                                 </Button>
