@@ -150,8 +150,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-100/50">
-      <div className="max-w-2xl mx-auto min-h-screen bg-white relative pb-[60px] shadow-2xl shadow-black/5">
+    <div className="min-h-screen bg-zinc-200/50 p-4 md:p-8">
+      <div className="max-w-2xl mx-auto min-h-[calc(100vh-64px)] bg-white relative pb-[60px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-zinc-200 rounded-3xl overflow-hidden">
 
         {/* Main Content Area */}
         <div className="min-h-screen">
