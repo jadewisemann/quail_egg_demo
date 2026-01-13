@@ -20,6 +20,7 @@ export interface Folder {
   icon: string;
   parentId: string | null;
   placeCount: number;
+  color?: string;
 }
 
 export interface BreadcrumbItem {

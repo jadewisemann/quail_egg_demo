@@ -1,20 +1,20 @@
 import { Place, Folder } from './types';
 
 export const mockFolders: Folder[] = [
-  { id: '1', name: '카페', icon: '☕', parentId: null, placeCount: 24 },
-  { id: '2', name: '다이닝', icon: '🍷', parentId: null, placeCount: 18 },
-  { id: '3', name: '여행', icon: '✈️', parentId: null, placeCount: 32 },
-  { id: '4', name: '운동/활동', icon: '🏃', parentId: null, placeCount: 12 },
-  { id: '1-1', name: '강남/역삼 카페', icon: '📁', parentId: '1', placeCount: 8 },
-  { id: '1-2', name: '성수동 카페', icon: '📁', parentId: '1', placeCount: 6 },
-  { id: '1-3', name: '홍대 카페', icon: '📁', parentId: '1', placeCount: 5 },
-  { id: '1-1-1', name: '조용한', icon: '📂', parentId: '1-1', placeCount: 4 },
-  { id: '1-1-2', name: '데이트 추천', icon: '📂', parentId: '1-1', placeCount: 3 },
-  { id: '2-1', name: '강남구 맛집', icon: '📁', parentId: '2', placeCount: 10 },
-  { id: '2-2', name: '이탈리안', icon: '📁', parentId: '2', placeCount: 5 },
-  { id: '2-1-1', name: '데이트 추천', icon: '📂', parentId: '2-1', placeCount: 5 },
-  { id: '3-1', name: '제주도', icon: '📁', parentId: '3', placeCount: 15 },
-  { id: '3-2', name: '부산', icon: '📁', parentId: '3', placeCount: 12 },
+  { id: '1', name: '카페', icon: '☕', parentId: null, placeCount: 24, color: '#f59e0b' }, // amber-500
+  { id: '2', name: '다이닝', icon: '🍷', parentId: null, placeCount: 18, color: '#ef4444' }, // red-500
+  { id: '3', name: '여행', icon: '✈️', parentId: null, placeCount: 32, color: '#3b82f6' }, // blue-500
+  { id: '4', name: '운동/활동', icon: '🏃', parentId: null, placeCount: 12, color: '#10b981' }, // emerald-500
+  { id: '1-1', name: '강남/역삼 카페', icon: '📁', parentId: '1', placeCount: 8, color: '#f59e0b' },
+  { id: '1-2', name: '성수동 카페', icon: '📁', parentId: '1', placeCount: 6, color: '#f59e0b' },
+  { id: '1-3', name: '홍대 카페', icon: '📁', parentId: '1', placeCount: 5, color: '#f59e0b' },
+  { id: '1-1-1', name: '조용한', icon: '📂', parentId: '1-1', placeCount: 4, color: '#f59e0b' },
+  { id: '1-1-2', name: '데이트 추천', icon: '📂', parentId: '1-1', placeCount: 3, color: '#f59e0b' },
+  { id: '2-1', name: '강남구 맛집', icon: '📁', parentId: '2', placeCount: 10, color: '#ef4444' },
+  { id: '2-2', name: '이탈리안', icon: '📁', parentId: '2', placeCount: 5, color: '#ef4444' },
+  { id: '2-1-1', name: '데이트 추천', icon: '📂', parentId: '2-1', placeCount: 5, color: '#ef4444' },
+  { id: '3-1', name: '제주도', icon: '📁', parentId: '3', placeCount: 15, color: '#3b82f6' },
+  { id: '3-2', name: '부산', icon: '📁', parentId: '3', placeCount: 12, color: '#3b82f6' },
 ];
 
 export const mockPlaces: Place[] = [
@@ -238,6 +238,35 @@ export const getFolderById = (folderId: string): Folder | undefined => {
 
 export const getPlaceById = (placeId: string): Place | undefined => {
   return mockPlaces.find(place => place.id === placeId);
+};
+
+export const getAllPlacesRecursive = (folderId: string): (Place & { folderColor?: string; folderIcon?: string })[] => {
+  const foldersToProcess = [folderId];
+  const allSubFolderIds = new Set<string>();
+
+  // Find all nested folder IDs
+  let i = 0;
+  while (i < foldersToProcess.length) {
+    const cid = foldersToProcess[i++];
+    allSubFolderIds.add(cid);
+    const subs = getSubFolders(cid);
+    subs.forEach(s => {
+      if (!allSubFolderIds.has(s.id)) {
+        foldersToProcess.push(s.id);
+      }
+    });
+  }
+
+  return mockPlaces
+    .filter(place => allSubFolderIds.has(place.folderId))
+    .map(place => {
+      const folder = getFolderById(place.folderId);
+      return {
+        ...place,
+        folderColor: folder?.color,
+        folderIcon: folder?.icon
+      };
+    });
 };
 
 export const getBreadcrumbs = (folderId: string) => {

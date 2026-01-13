@@ -150,17 +150,19 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-200/50 p-4 md:p-8">
-      <div className="max-w-2xl mx-auto min-h-[calc(100vh-64px)] bg-white relative pb-[60px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-zinc-200 rounded-3xl overflow-hidden">
+    <div className="h-screen bg-zinc-200/50 p-4 md:p-10 lg:p-12 overflow-hidden flex flex-col">
+      <div className="max-w-2xl w-full mx-auto h-full bg-white relative shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] border border-zinc-200 rounded-[40px] overflow-hidden flex flex-col">
 
-        {/* Main Content Area */}
-        <div className="min-h-screen">
-          {renderContent()}
+        {/* Main Content Area - Scrollable */}
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <div className="pb-[70px]">
+            {renderContent()}
+          </div>
         </div>
 
-        {/* Bottom Navigation */}
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 z-50">
-          <div className="flex justify-around items-center h-[60px] pb-1">
+        {/* Bottom Navigation - Fixed within the container */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-zinc-100 z-50">
+          <div className="flex justify-around items-center h-[65px] px-2 pb-2">
             <button
               onClick={() => handleTabChange('home')}
               className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'home' ? 'text-blue-600' : 'text-zinc-400'}`}
