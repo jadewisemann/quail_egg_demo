@@ -146,55 +146,57 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto min-h-screen bg-white relative pb-[60px] shadow-sm">
+    <div className="min-h-screen bg-zinc-100/50">
+      <div className="max-w-2xl mx-auto min-h-screen bg-white relative pb-[60px] shadow-2xl shadow-black/5">
 
-      {/* Main Content Area */}
-      <div className="min-h-screen">
-        {renderContent()}
-      </div>
+        {/* Main Content Area */}
+        <div className="min-h-screen">
+          {renderContent()}
+        </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 z-50">
-        <div className="flex justify-around items-center h-[60px] pb-1">
-          <button
-            onClick={() => handleTabChange('home')}
-            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'home' ? 'text-blue-600' : 'text-zinc-400'}`}
-          >
-            <Home className="w-6 h-6" />
-            <span className="text-[10px] font-medium">홈</span>
-          </button>
+        {/* Bottom Navigation */}
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white border-t border-zinc-200 z-50">
+          <div className="flex justify-around items-center h-[60px] pb-1">
+            <button
+              onClick={() => handleTabChange('home')}
+              className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'home' ? 'text-blue-600' : 'text-zinc-400'}`}
+            >
+              <Home className="w-6 h-6" />
+              <span className="text-[10px] font-medium">홈</span>
+            </button>
 
-          <button
-            onClick={() => handleTabChange('search')}
-            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'search' ? 'text-blue-600' : 'text-zinc-400'}`}
-          >
-            <Search className="w-6 h-6" />
-            <span className="text-[10px] font-medium">검색</span>
-          </button>
+            <button
+              onClick={() => handleTabChange('search')}
+              className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'search' ? 'text-blue-600' : 'text-zinc-400'}`}
+            >
+              <Search className="w-6 h-6" />
+              <span className="text-[10px] font-medium">검색</span>
+            </button>
 
-          <button
-            onClick={() => handleTabChange('curation')}
-            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'curation' ? 'text-blue-600' : 'text-zinc-400'}`}
-          >
-            <Sparkles className="w-6 h-6" />
-            <span className="text-[10px] font-medium">AI 큐레이션</span>
-          </button>
+            <button
+              onClick={() => handleTabChange('curation')}
+              className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'curation' ? 'text-blue-600' : 'text-zinc-400'}`}
+            >
+              <Sparkles className="w-6 h-6" />
+              <span className="text-[10px] font-medium">AI 큐레이션</span>
+            </button>
 
-          <button
-            onClick={() => handleTabChange('insights')}
-            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'insights' ? 'text-blue-600' : 'text-zinc-400'}`}
-          >
-            <BarChart3 className="w-6 h-6" />
-            <span className="text-[10px] font-medium">인사이트</span>
-          </button>
+            <button
+              onClick={() => handleTabChange('insights')}
+              className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'insights' ? 'text-blue-600' : 'text-zinc-400'}`}
+            >
+              <BarChart3 className="w-6 h-6" />
+              <span className="text-[10px] font-medium">인사이트</span>
+            </button>
 
-          <button
-            onClick={() => handleTabChange('profile')}
-            className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'profile' ? 'text-blue-600' : 'text-zinc-400'}`}
-          >
-            <User className="w-6 h-6" />
-            <span className="text-[10px] font-medium">프로필</span>
-          </button>
+            <button
+              onClick={() => handleTabChange('profile')}
+              className={`flex flex-col items-center gap-1 w-full h-full justify-center ${activeTab === 'profile' ? 'text-blue-600' : 'text-zinc-400'}`}
+            >
+              <User className="w-6 h-6" />
+              <span className="text-[10px] font-medium">프로필</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
