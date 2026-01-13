@@ -14,10 +14,10 @@ export function ProfilePage() {
                     </div>
                     <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                            <h1 className="text-xl font-bold text-zinc-900">제이드 와이즈먼</h1>
+                            <h1 className="text-xl font-bold text-zinc-900">John Doe</h1>
                             <Badge className="bg-blue-600 text-[10px] h-5">PRO</Badge>
                         </div>
-                        <p className="text-sm text-zinc-500 mb-2">@jadewisemann</p>
+                        <p className="text-sm text-zinc-500 mb-2">@johndoe</p>
                         <div className="flex gap-4">
                             <div className="text-center">
                                 <div className="text-sm font-bold">2.1k</div>

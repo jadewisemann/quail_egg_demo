@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Home, Search, Sparkles, BarChart3, User } from 'lucide-react';
 import { HomePage } from '@/app/components/HomePage';
 import { ListDetailPage } from '@/app/components/ListDetailPage';
@@ -26,6 +26,10 @@ export default function App() {
   const [currentView, setCurrentView] = useState<View>({ type: 'home' });
   const [navigationStack, setNavigationStack] = useState<View[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>('home');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentView]);
 
   const hasPlaces = mockPlaces.length > 0;
 
